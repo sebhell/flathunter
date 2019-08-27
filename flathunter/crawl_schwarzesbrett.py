@@ -29,7 +29,8 @@ class CrawlSchwarzesBrettBremen:
         return entries
 
     def get_page(self, search_url):
-        return BeautifulSoup(search_url, features='html.parser', parse_only=SoupStrainer(['ul', 'li']))
+        cur_page = self.dump_html(search_url)
+        return BeautifulSoup(cur_page, features='html.parser', parse_only=SoupStrainer(['ul', 'li']))
 
     def extract_data(self, soup):
 
@@ -47,7 +48,7 @@ class CrawlSchwarzesBrettBremen:
                     details = self.fetch_details(base_url + link)
 
                     details = {
-                        'id': hashlib.md5(title),
+                        'id': abs(hash(title)),
                         'url': base_url + link,
                         'title': title,
                         'price': 0,
