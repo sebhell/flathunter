@@ -12,6 +12,7 @@ base_url = 'https://schwarzesbrett.bremen.de'
 class CrawlSchwarzesBrettBremen:
     __log__ = logging.getLogger(__name__)
     URL_PATTERN = re.compile(r'https://schwarzesbrett\.bremen\.de')
+    maxlen = 1000
 
     def __init__(self):
         logging.getLogger("requests").setLevel(logging.WARNING)
@@ -47,16 +48,16 @@ class CrawlSchwarzesBrettBremen:
                     link = li_tag.find_all('a', href=True)[0]['href']
                     details = self.fetch_details(base_url + link)
 
-                    details = {
+                    offer = {
                         'id': abs(hash(title)) % (10**8),
                         'url': base_url + link,
                         'title': title,
                         'price': 0,
-                        'size': details,
+                        'size': details[:self.maxlen] + '...' if len(details) > self.maxlen else details,
                         'rooms': 0,
                         'address': base_url + link
                     }
-                    fetched_offers.append(details)
+                    fetched_offers.append(offer)
 
         return fetched_offers
 
