@@ -48,7 +48,7 @@ class CrawlSchwarzesBrettBremen:
                     details = self.fetch_details(base_url + link)
 
                     details = {
-                        'id': abs(hash(title)),
+                        'id': abs(hash(title)) % (10**8),
                         'url': base_url + link,
                         'title': title,
                         'price': 0,
