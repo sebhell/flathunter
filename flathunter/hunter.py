@@ -50,14 +50,24 @@ class Hunter:
                             self.__log__.debug("Loaded address %s for url %s" % (address, url))
                             break
 
-                # calculdate durations
-                message = config.get('message', "").format(
-                    title=expose['title'],
-                    rooms=expose['rooms'],
-                    size=expose['size'],
-                    price=expose['price'],
-                    url=expose['url'],
-                    durations=self.get_formatted_durations(config, address)).strip()
+                if 'schwarzesbrett' in expose.keys():
+                    message = "{title}" \
+                              "" \
+                              "{schwarzesbrett}" \
+                              "" \
+                              "{url}".format(
+                        title=expose['title'],
+                        schwarzesbrett=expose['schwarzesbrett'],
+                        url=expose['url'])
+                else:
+                    # calculdate durations
+                    message = config.get('message', "").format(
+                        title=expose['title'],
+                        rooms=expose['rooms'],
+                        size=expose['size'],
+                        price=expose['price'],
+                        url=expose['url'],
+                        durations=self.get_formatted_durations(config, address)).strip()
 
                 # send message to all receivers
                 sender.send_msg(message)
