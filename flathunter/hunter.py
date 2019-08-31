@@ -51,10 +51,8 @@ class Hunter:
                             break
 
                 if 'schwarzesbrett' in expose.keys():
-                    message = "{title}" \
-                              "" \
-                              "{schwarzesbrett}" \
-                              "" \
+                    message = "{title}\n\n" \
+                              "{schwarzesbrett}\n\n" \
                               "{url}".format(
                         title=expose['title'],
                         schwarzesbrett=expose['schwarzesbrett'],
