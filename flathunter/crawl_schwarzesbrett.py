@@ -52,7 +52,8 @@ class CrawlSchwarzesBrettBremen:
                         'id': abs(hash(title)) % (10**8),
                         'url': base_url + link,
                         'title': title,
-                        'schwarzesbrett': details[:self.maxlen] + '...' if len(details) > self.maxlen else details
+                        'schwarzesbrett': details[:self.maxlen] + '...' if len(details) > self.maxlen else details,
+                        'address': ""
                     }
                     fetched_offers.append(offer)
 
