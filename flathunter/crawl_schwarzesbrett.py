@@ -49,7 +49,6 @@ class CrawlSchwarzesBrettBremen:
         cur_date = time.strftime('%d.%m.%y')
 
         for ul_tag in soup.find_all('ul', {'class': 'content_list eintraege_list'}):
-            print('ul_tag')
             for li_tag in ul_tag.find_all('li'):
                 splitted_tag = li_tag.text.split()
                 title = ' '.join(splitted_tag[:-1])
